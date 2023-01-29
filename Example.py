@@ -31,7 +31,7 @@ import URBasic
 import time
 
 
-host = '192.168.0.113'   #E.g. a Universal Robot offline simulator, please adjust to match your IP
+host = '192.168.81.128'   #E.g. a Universal Robot offline simulator, please adjust to match your IP
 acc = 0.9
 vel = 0.9
 
