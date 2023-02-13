@@ -1,0 +1,29 @@
+
+import math
+import URBasic
+
+
+host = '192.168.81.128'
+#host = '192.168.56.102'
+acc = 3
+vel = 3
+
+
+def ExampleurScript():
+
+    robotModle = URBasic.robotModel.RobotModel()
+    robot = URBasic.urScriptExt.UrScriptExt(host=host,robotModel=robotModle)
+    robot.reset_error()
+
+    robot.movej(q=[-2.14,-1.,1, -1.,-1.5,0], a=acc, v=vel)
+    robot.movej(pose=[0.3,0.3,0.3, 0,3.14,0], a=acc, v=vel)
+
+    robot.reset_error()
+    robot.close()
+    
+
+
+
+if __name__ == '__main__':
+    ExampleurScript()
+ 
