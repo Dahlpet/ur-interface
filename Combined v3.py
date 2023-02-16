@@ -1,6 +1,5 @@
-import Leap, sys, URBasic, URBasic.urScript
+import Leap, sys, URBasic, URBasic.urScript, time
 
-#host = '169.254.226.180'
 host = '192.168.12.128'
 
 robotModle = URBasic.robotModel.RobotModel()
@@ -9,23 +8,21 @@ robot = URBasic.urScriptExt.UrScriptExt(host=host,robotModel=robotModle)
 class SampleListener(Leap.Listener):
 
     def on_frame(self, controller):
- 
+
         frame = controller.frame()
         for hand in frame.hands:
 
-            a=1
-            x, y, z = (format(hand.palm_position[0]/500, '.3f'), format(hand.palm_position[1]/1000, '.3f'), format(hand.palm_position[2]/500, '.3f'))
-            print(x, y, z)
-     
+            x, y, z = (hand.palm_position[0]/500, hand.palm_position[1]/1000, hand.palm_position[2]/500)
+            print(x, y, z, frame)
+            robot.movej(pose=[z,x,y, -0,3.14,0], a=5000, v=5000)
+        time.sleep(0.1)    
+   
+   
 def ExampleurScriptLEAP():
 
         listener = SampleListener()
         controller = Leap.Controller()
         controller.add_listener(listener)
-
-        robot.movel(pose=[0.6,0.2,0.4, -0,3.14,0], a=0.8, v=500)
-        robot.movel(pose=[0.3,-0.3,0.3, 0,3.14,0], a=0.8, v=500)
-        robot.close()
      
         print("Press Enter to quit...")
         try:
@@ -34,6 +31,7 @@ def ExampleurScriptLEAP():
             pass
         finally:
             controller.remove_listener(listener)
+            robot.close()
         SampleListener.frame = 0
 
 if __name__ == '__main__':

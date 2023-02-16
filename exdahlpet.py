@@ -2,7 +2,7 @@ import URBasic
 import time
 
 
-host = '192.168.56.101'   #E.g. a Universal Robot offline simulator, please adjust to match your IP
+host = '192.168.81.128'   #E.g. a Universal Robot offline simulator, please adjust to match your IP
 acc = 10
 vel = 10
 
@@ -39,7 +39,7 @@ def ExampleExtendedFunctions():
     print('forcs_remote')
     robot.set_force_remote(task_frame=[0., 0., 0.,  0., 0., 0.], selection_vector=[0,0,1,0,0,0], wrench=[0., 0., 20.,  0., 0., 0.], f_type=2, limits=[2, 2, 1.5, 1, 1, 1])
     robot.reset_error()
-    a = 5
+    a = 0
     upFlag = True
     while a<3:
         pose = robot.get_actual_tcp_pose()
