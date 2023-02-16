@@ -1,0 +1,42 @@
+import Leap, sys, URBasic, URBasic.urScript
+
+#host = '169.254.226.180'
+host = '192.168.12.128'
+
+robotModle = URBasic.robotModel.RobotModel()
+robot = URBasic.urScriptExt.UrScriptExt(host=host,robotModel=robotModle)
+
+
+class SampleListener(Leap.Listener):
+
+    def on_frame(self, controller):
+
+        frame = controller.frame()
+        for hand in frame.hands:
+
+            x, y, z = (format(hand.palm_position[0]/500, '.4f'), format(hand.palm_position[1]/1000, '.4f'), format(hand.palm_position[2]/500, '.4f'))
+            #print(x, y, z, frame)
+
+            print(x, y, z, frame)
+        
+            new_position = [float(z), float(x), float(y), -0, 3.14, 0]
+            robot.movep(pose=new_position, a=0.9, v=5, r=0.1)
+     
+def ExampleurScriptLEAP():
+
+        listener = SampleListener()
+        controller = Leap.Controller()
+        controller.add_listener(listener)
+     
+        print("Press Enter to quit...")
+        try:
+            sys.stdin.readline()
+        except KeyboardInterrupt:
+            pass
+        finally:
+            controller.remove_listener(listener)
+            robot.close()
+        SampleListener.frame = 0
+
+if __name__ == '__main__':
+    ExampleurScriptLEAP()
