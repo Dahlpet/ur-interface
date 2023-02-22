@@ -7,27 +7,16 @@ vel = 50
 
 class SampleListener(Leap.Listener):
 
-    def on_init(self, controller):
-        pass
-
-    def on_connect(self, controller):
-        pass
-
-    def on_disconnect(self, controller):
-        pass
-
-    def on_exit(self, controller):
-        pass
-
     def on_frame(self, controller):
 
         frame = controller.frame()
 
         for hand in frame.hands:
-
-            handType = "Left hand" if hand.is_left else "Right hand"
-
-            print("position: %s" %(hand.palm_position))
+            
+            x= hand.palm_position
+            print("position:" + str(x))
+            return x
+        
 
 
         if not frame.hands.is_empty:
@@ -63,5 +52,5 @@ def main():
         controller.remove_listener(listener)    
 
 if __name__ == '__main__':
-    ExampleurScript()
+    #ExampleurScript()
     main()

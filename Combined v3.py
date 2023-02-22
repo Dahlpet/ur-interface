@@ -1,9 +1,12 @@
-import Leap, sys, URBasic, URBasic.urScript, time
+import Leap, sys, URBasic, URBasic.urScript, time, socket
 
+#host = '169.254.226.180'
 host = '192.168.12.128'
+
 
 robotModle = URBasic.robotModel.RobotModel()
 robot = URBasic.urScriptExt.UrScriptExt(host=host,robotModel=robotModle)
+robot.reset_error()
 
 class SampleListener(Leap.Listener):
 
@@ -13,11 +16,15 @@ class SampleListener(Leap.Listener):
         for hand in frame.hands:
 
             x, y, z = (hand.palm_position[0]/500, hand.palm_position[1]/1000, hand.palm_position[2]/500)
-            print(x, y, z, frame)
-            robot.movej(pose=[z,x,y, -0,3.14,0], a=5000, v=5000)
-        time.sleep(0.1)    
-   
-   
+
+            normal = hand.palm_normal
+            direction = hand.direction
+            rx, ry, rz = direction.pitch, normal.roll, direction.yaw
+            
+            robot.movej(pose=[z,x,y, -0,3.14,0], a=0.8, v=5000)
+            print(round(x, 3), round(y, 3), round(z, 3), round(rx, 3), round(ry, 3), round(rz, 3), frame)
+            
+
 def ExampleurScriptLEAP():
 
         listener = SampleListener()
