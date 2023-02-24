@@ -6,7 +6,7 @@
 # between Leap Motion and you, your company or other organization.             #
 ################################################################################
 
-import Leap, sys, time
+import Leap, sys, time, math
 
 
 class SampleListener(Leap.Listener):
@@ -70,11 +70,23 @@ class SampleListener(Leap.Listener):
                 # Get bones
                 for b in range(0, 4):
                     bone = finger.bone(b)
-                    print("      Bone: %s, start: %s, end: %s, direction: %s" % (
-                        self.bone_names[bone.type],
-                        bone.prev_joint,
-                        bone.next_joint,
-                        bone.direction))
+                    #print("      Bone: %s, start: %s, end: %s, direction: %s" % (
+                        #self.bone_names[bone.type],
+                       #bone.prev_joint,
+                        #bone.next_joint,
+                        #bone.direction))
+            t = hand.fingers[0].bone(bone.type).next_joint
+            i = hand.fingers[1].bone(bone.type).next_joint
+            #diff = t - i
+            d = math.sqrt(((i[0]-t[0])**2 + (i[1]-t[1])**2 + (i[2]-t[2])**2))
+            if d > 120:
+                d = 120
+            if d < 15:
+                d = 15
+
+            #print("Fingertips " + str(t) + str(i))
+            #print(diff)
+            print(round(d,0))
 
         if not frame.hands.is_empty:
             pass

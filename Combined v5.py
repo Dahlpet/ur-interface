@@ -1,7 +1,7 @@
 import Leap, sys, URBasic, URBasic.urScript, time, socket
 
-host = '169.254.226.180'
-#host ='192.168.12.128'
+#host = '169.254.226.180'
+host ='192.168.81.128'
 port=63352 #PORT used by robotiq gripper
 
 robotModle = URBasic.robotModel.RobotModel()

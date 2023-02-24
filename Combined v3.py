@@ -1,7 +1,7 @@
 import Leap, sys, URBasic, URBasic.urScript, time, socket
 
 #host = '169.254.226.180'
-host = '192.168.12.128'
+host = '192.168.81.128'
 
 
 robotModle = URBasic.robotModel.RobotModel()
@@ -19,9 +19,9 @@ class SampleListener(Leap.Listener):
 
             normal = hand.palm_normal
             direction = hand.direction
-            rx, ry, rz = direction.pitch, normal.roll, direction.yaw
+            rx, ry, rz = direction.pitch, (1.3*normal.roll + 2.9), direction.yaw
             
-            robot.movej(pose=[z,x,y, -0,3.14,0], a=0.8, v=5000)
+            robot.movej(pose=[z,x,y, -0,ry,0], a=0.8, v=5000)
             print(round(x, 3), round(y, 3), round(z, 3), round(rx, 3), round(ry, 3), round(rz, 3), frame)
             
 

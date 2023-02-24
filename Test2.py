@@ -44,16 +44,18 @@ class SampleListener(Leap.Listener):
             # Get fingers
             for finger in hand.fingers:
 
-                print("    %s finger"% (
-                    self.finger_names[finger.type]))
+                #print("    %s finger"% (
+                    #self.finger_names[finger.type]))
                 
                 bone = finger.bone(3)
-                print("Bone: %s, start: %s, end: %s" % (
-                    self.bone_names[bone.type],
-                    bone.prev_joint,
-                    bone.next_joint))
-                f = bone.next_joint[0]
-                print("test" + str(f))
+                y= bone.prev_joint
+                #print("Bone: %s, start: %s, end: %s" % (
+                    #self.bone_names[bone.type],
+                    #bone.prev_joint,
+                    #bone.next_joint))
+            y = hand.fingers[0].bone(bone.type).next_joint
+            g = hand.fingers[1].bone(bone.type).next_joint
+            print("Fingertips " + str(y) + str(g))
 
         if not frame.hands.is_empty:
             pass

@@ -1,7 +1,7 @@
 import Leap, sys, URBasic, URBasic.urScript
 
 #host = '169.254.226.180'
-host = '192.168.12.128'
+host = '192.168.81.128'
 
 robotModle = URBasic.robotModel.RobotModel()
 robot = URBasic.urScriptExt.UrScriptExt(host=host,robotModel=robotModle)
