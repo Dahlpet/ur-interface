@@ -27,7 +27,6 @@ class SampleListener(Leap.Listener):
             with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                 s.connect((host, port))
                 #s.sendall(b'SET ACT 1\n')
-                #time.sleep(4)
                 s.sendall(b'SET SPE 200\n')
                 if x > -0.34:
                     s.sendall(b'SET POS 0\n')
@@ -35,7 +34,6 @@ class SampleListener(Leap.Listener):
                     s.sendall(b'SET POS 226\n')
                 s.sendall(b'GET POS\n')
                 data = s.recv(2**10)
-                #time.sleep(1)
             print('Gripper finger position is: ', data)
 
 def ExampleurScriptLEAP(controller):

@@ -15,9 +15,9 @@ class SampleListener(Leap.Listener):
         for hand in frame.hands:
 
             x, y, z = (format(hand.palm_position[0]/500, '.4f'), format(hand.palm_position[1]/1000, '.4f'), format(hand.palm_position[2]/500, '.4f'))
-            #print(x, y, z, frame)
+            print(x, y, z)
+        
 
-            print(x, y, z, frame)
         
             new_position = [float(z), float(x), float(y), -0, 3.14, 0]
             robot.movep(pose=new_position, a=0.9, v=5, r=0.1)
@@ -27,6 +27,10 @@ def ExampleurScriptLEAP():
         listener = SampleListener()
         controller = Leap.Controller()
         controller.add_listener(listener)
+
+        #robot.movel(pose=[0.6,0.2,0.4, -0,3.14,0], a=5, v=500)
+        #robot.movel(pose=[0.3,-0.3,0.3, 0,3.14,0], a=5, v=500)
+        #robot.close()
      
         print("Press Enter to quit...")
         try:
