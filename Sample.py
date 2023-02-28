@@ -27,7 +27,6 @@ class SampleListener(Leap.Listener):
         pass
 
     def on_frame(self, controller):
-        time.sleep(1)
         # Get the most recent frame and report some basic information
         frame = controller.frame()
 
